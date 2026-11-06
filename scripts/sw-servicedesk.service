@@ -1,0 +1,37 @@
+# ========================================================================
+# SW Service Desk v1.0 - Serviço Linux Systemd
+# Empresa: SW Cloud Solutions
+# Localização recomendada: /etc/systemd/system/sw-servicedesk.service
+# ========================================================================
+
+[Unit]
+Description=SW Service Desk v1.0 - ITSM & CMDB Application Server
+Documentation=https://servicedesk.swcloudsolutions.pt
+After=network.target mysql.service mariadb.service
+Wants=mysql.service
+
+[Service]
+Type=simple
+User=swservice
+Group=swservice
+WorkingDirectory=/opt/sw-servicedesk
+Environment=NODE_ENV=production
+EnvironmentFile=/opt/sw-servicedesk/.env
+ExecStart=/usr/bin/npm run start
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+TimeoutStopSec=20
+StandardOutput=append:/var/log/sw-servicedesk/app.log
+StandardError=append:/var/log/sw-servicedesk/error.log
+SyslogIdentifier=sw-servicedesk
+
+# Limites de segurança do sistema operacional
+LimitNOFILE=65536
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

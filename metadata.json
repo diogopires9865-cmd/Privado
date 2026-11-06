@@ -1,0 +1,6 @@
+{
+  "name": "SW Service Desk",
+  "description": "SW Service Desk Interno v1.0 - Sistema interno completo de Service Desk, ITSM, Gestão de Ativos (CMDB), SLA, Base de Conhecimento e Assistência de IA da SW Cloud Solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
